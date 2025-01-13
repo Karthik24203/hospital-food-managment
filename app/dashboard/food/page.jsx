@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { X } from "lucide-react";
 import AssignTo from "./_component/AssignTo";
 import axios from "axios";
