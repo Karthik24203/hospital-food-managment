@@ -72,13 +72,9 @@ function Sidebar() {
 
     if (designation === "Cook") {
       return (
-        <Link href="/dashboard/food-prepare">
+        <Link href="/dashboard">
           <Button
-            className={`w-full py-2 text-md active:bg-slate-500 ${
-              isActive("/dashboard/food-prepare")
-                ? "bg-white text-blue-500"
-                : "text-white"
-            }`}
+            className={`w-full py-2 text-md active:bg-slate-500 bg-white text-blue-500`}
           >
             Food Prepare
           </Button>
@@ -88,13 +84,9 @@ function Sidebar() {
 
     if (designation === "Deliverer") {
       return (
-        <Link href="/dashboard/food-delivers">
+        <Link href="/dashboard">
           <Button
-            className={`w-full py-2 text-md active:bg-slate-500 ${
-              isActive("/dashboard/food-delivers")
-                ? "bg-white text-blue-500"
-                : "text-white"
-            }`}
+            className={`w-full py-2 text-md active:bg-slate-500 bg-white text-blue-500`}
           >
             Food Delivers
           </Button>

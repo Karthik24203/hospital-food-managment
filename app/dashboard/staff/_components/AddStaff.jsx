@@ -97,6 +97,7 @@ function AddStaff({ setAdd }) {
             value={formData.password}
             onChange={handleChange}
             placeholder="Password"
+            minLength="8"
             required
           />
         </div>
