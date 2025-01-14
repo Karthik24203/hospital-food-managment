@@ -6,39 +6,35 @@ function Delivery() {
   const [meals, setMeals] = useState([]);
   const [patients, setPatients] = useState({});
 
-  // Fetch meal data
   const fetchMeal = async () => {
     try {
       const response = await axios.get("/api/get-meal");
-      setMeals(response.data.result); // Assuming the API returns an array of meal objects
+      setMeals(response.data.result);
       console.log(response.data.result);
     } catch (error) {
       console.error("Error fetching meal data:", error);
     }
   };
 
-  // Fetch patient data
   const fetchPatientData = async () => {
     try {
       const response = await axios.get("/api/get-patient");
-      // Transform the patient list into a dictionary for easy lookup by patientId
+
       const patientDict = response.data.patients.reduce((acc, patient) => {
         acc[patient.id] = patient;
         return acc;
       }, {});
-      setPatients(patientDict); // Store the patient data in a state
+      setPatients(patientDict);
       console.log(response.data.patients);
     } catch (error) {
       console.error("Error fetching patient data:", error);
     }
   };
 
-  // Handle delivery status update
   const markAsDelivered = async (mealId) => {
     try {
       const response = await axios.post("/api/up-delivered", { mealId });
       if (response.data.success) {
-        // Update the local state after the delivery status is updated
         setMeals((prevMeals) =>
           prevMeals.map((meal) =>
             meal.id === mealId ? { ...meal, deliveryStatus: "delivered" } : meal
@@ -62,7 +58,6 @@ function Delivery() {
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {meals.length > 0 ? (
           meals.map((meal) => {
-            // Retrieve patient details based on the meal's patientId
             const patient = patients[meal.patientId];
 
             return (
@@ -84,7 +79,6 @@ function Delivery() {
                   <strong>Deliverer:</strong> {meal.deliverer}
                 </div>
 
-                {/* Display Patient Information */}
                 {patient && (
                   <div className="text-sm flex flex-col gap-1 text-gray-500 mb-4">
                     <p>
@@ -101,7 +95,6 @@ function Delivery() {
                   </div>
                 )}
 
-                {/* Delivery Status */}
                 {meal.deliveryStatus === "delivered" ? (
                   <div className="text-sm text-green-500 font-semibold">
                     Status: Delivered
@@ -112,7 +105,6 @@ function Delivery() {
                   </div>
                 )}
 
-                {/* Mark as Delivered Button */}
                 {meal.deliveryStatus === "not-delivered" && (
                   <button
                     onClick={() => markAsDelivered(meal.id)}

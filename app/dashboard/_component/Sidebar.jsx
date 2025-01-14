@@ -1,8 +1,8 @@
-"use client"; // Needed for client-side interactivity in Next.js components
+"use client"; 
 
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation"; // For getting the current route
-import Link from "next/link"; // Next.js Link for navigation
+import { usePathname } from "next/navigation";
+import Link from "next/link"; 
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { UserButton, useUser } from "@clerk/nextjs";
@@ -10,10 +10,10 @@ import { UserButton, useUser } from "@clerk/nextjs";
 function Sidebar() {
   const pathname = usePathname();
   const [designation, setDesignation] = useState(null);
-  const [email, setEmail] = useState(null); // Initialize email state to null
+  const [email, setEmail] = useState(null); 
   const { user } = useUser();
 
-  // Fetch staff details (e.g., for logged-in user)
+
   const fetchStaff = async (userEmail) => {
     try {
       const { data } = await axios.get("/api/get-staff");
@@ -30,18 +30,18 @@ function Sidebar() {
   };
 
   useEffect(() => {
-    // Wait for the user object to be available
+   
     if (user?.primaryEmailAddress?.emailAddress) {
       const emailAddress = user.primaryEmailAddress.emailAddress;
       setEmail(emailAddress);
-      fetchStaff(emailAddress); // Fetch staff data with email
+      fetchStaff(emailAddress); 
     }
   }, [user]);
 
-  // Helper function to check if the route matches
+ 
   const isActive = (path) => pathname === path;
 
-  // Render the sidebar based on the designation
+
   const renderSidebarContent = () => {
     if (designation === "Manager") {
       return (

@@ -5,18 +5,16 @@ import React, { useEffect, useState } from "react";
 function FoodtoCook() {
   const [meals, setMeals] = useState([]);
 
-  // Fetch meal data
   const fetchMeal = async () => {
     try {
       const response = await axios.get("/api/get-meal");
-      setMeals(response.data.result); // Assuming the API returns an array of meal objects
-      console.log(response.data.result); // Assuming the API returns an array of meal objects
+      setMeals(response.data.result);
+      console.log(response.data.result);
     } catch (error) {
       console.error("Error fetching meal data:", error);
     }
   };
 
-  // Update cook status to "cooked"
   const handleCookedStatus = async (mealId) => {
     try {
       const response = await axios.post("/api/up-cooked", { mealId });
@@ -67,7 +65,6 @@ function FoodtoCook() {
                 <strong>Patient ID:</strong> {meal.patientId}
               </div>
 
-              {/* Display cook status and button if not cooked */}
               {meal.cookStatus === "not-cooked" && (
                 <button
                   onClick={() => handleCookedStatus(meal.id)}
@@ -77,7 +74,6 @@ function FoodtoCook() {
                 </button>
               )}
 
-              {/* Display the current cook status */}
               <div className="mt-2 text-sm">
                 <strong>Status: </strong>
                 <span
